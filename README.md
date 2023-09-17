@@ -258,7 +258,7 @@ When attempting to run `terrafor login` it will launch bash a wiswig view to gen
 The workaround is manually generate a token in Terraform Cloud
 
 ```
-https://app.terraform.io/app/settings/tokens=terraform-login
+https://app.terraform.io/app/settings/tokens?source=terraform-login
 ```
 
 Then create open the file manually here:
@@ -279,3 +279,5 @@ Provide the following code (replace your token in the file):
   }
 }
 ```
+
+We have automated this workaround with the following bash script [bin/generate_tfrc_credentials](bin/generate_tfrc_credentials)
