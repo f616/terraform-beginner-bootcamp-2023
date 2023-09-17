@@ -194,6 +194,7 @@ Terraform sources their providers and modules from the Terraform registry which 
 - **Modules** are a way to make large amount of terraform code modular, portable and shareable.
 
 [Random Terraform Provider](https://registry.terraform.io/providers/hashicorp/random/)
+
 [AWS Terraform Provider](https://registry.terraform.io/providers/hashicorp/aws/latest)
 
 ### Terraform Console
