@@ -14,6 +14,52 @@ The general format:
 - **MINOR** version when you add functionality in a backward compatible manner
 - **PATCH** version when you make backward compatible bug fixes
 
+## Using Git
+
+### Creating tags
+
+After PR or merge it's good practice to create a git tag using the following command:
+
+`git tag 0.2.0`
+
+And then push the tag to the git repository:
+
+`git push --tags`
+
+### Deleting tags
+
+If a tag is created and pushed by mistake, it can be deleted.
+
+Delete the tag locally using the command `git tad -d 0.2.0`
+
+Delete the tag from the remote repository using the command `git push --delete origin 0.2.0`
+
+### Checkout
+
+Git checkout is what we use to move the HEAD over the commits in the branch, over tags or how to change branches.
+
+#### Move over the branch
+
+`git checkout 6c3f6da1dead19743c106ded03a33ef619912168`
+
+#### Move to a specific tag
+
+`git checkout 0.2.0`
+
+#### Change branch
+
+`git checkout main`
+
+### Saving your uncommitted work
+
+Use `git stash` when you want to record the current state of the working directory and the index, but want to go back to a clean working directory. The command saves your local modifications away and reverts the working directory to match the `HEAD` commit.
+
+Then change your `HEAD` to the needed branch and use either the command `git stash pop` or `git stash apply` to apply the saved changes.
+
+The `git stash pop` removes the changes from your stash and reapplies them to your working copy.
+
+The `git stash apply` is useful if you want to apply the same stashed changes to multiple branches.
+
 ## Install Terraform CLI
 
 ### Considerations with the Terraform CLI changes
