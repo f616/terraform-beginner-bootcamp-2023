@@ -99,3 +99,70 @@ You can use `terraform import`, but it won't work for all cloud resources. You n
 If someone goes and deletes or modifies cloud resource manually through ClickOps.
 
 If we run `terraform plan` is with attempt to put our infrastructure back into the expected state fixing Configuration Drift.
+
+### Fix using Terraform Refresh
+
+```sh
+terraform apply -refresh-only -auto-approve
+```
+
+## Terraform Modules
+
+### Terraform Module Structure
+
+It is recommended to place modules in a `modules` directory when locally developing modules but can name it whatever you like.
+
+```sh
+$ tree complete-module/
+.
+├── README.md
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── ...
+├── modules/
+│   ├── nestedA/
+│   │   ├── README.md
+│   │   ├── variables.tf
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   ├── nestedB/
+│   ├── .../
+├── examples/
+│   ├── exampleA/
+│   │   ├── main.tf
+│   ├── exampleB/
+│   ├── .../
+```
+
+[Modules Structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
+
+### Passing Input Variables
+
+We can pass input variables to our module.
+The module has to declare the terraform variables into it's own variables.tf.
+
+```TOML
+module "terrahouse_aws"{
+    source = "./modules/terrahouse_aws"
+    user_uuid = var.user_uuid
+    bucket_name = var.bucket_name
+}
+```
+
+### Modules Sources
+
+Using the source we can import the module from various places, eg:
+
+- locally
+- Github
+- Terraform Registry
+
+
+```TOML
+module "terrahouse_aws"{
+    source = "./modules/terrahouse_aws"
+}
+```
+
+[Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
