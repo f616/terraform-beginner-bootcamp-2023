@@ -54,6 +54,10 @@ Git checkout is what we use to move the HEAD over the commits in the branch, ove
 
 Use `git stash` when you want to record the current state of the working directory and the index, but want to go back to a clean working directory. The command saves your local modifications away and reverts the working directory to match the `HEAD` commit.
 
+By default, stashes are marked as **WIP** on top of the branch and commit that you created the stash from. However, this limited amount of information isn't helpful when you have multiple stashes, as it becomes difficult to remember or individually check their contents. To add a description to the stash, you can use the command `git stash save <description>`.
+
+You can view your stashes with the command `git stash list`. Stashes are saved in a last-in-first-out (LIFO) approach.
+
 Then change your `HEAD` to the needed branch and use either the command `git stash pop` or `git stash apply` to apply the saved changes.
 
 The `git stash pop` removes the changes from your stash and reapplies them to your working copy.
