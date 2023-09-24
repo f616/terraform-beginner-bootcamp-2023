@@ -35,16 +35,47 @@ We can use the `-var` flag to set an input variable or override a variable in th
 
 ### var-file flag
 
-- **TODO:** document this flag
+This flags allows you to specify a .tfvars file to be loaded, eg. `terraform apply -var-file="testing.tfvars"`.
+
+The file format uses the basic syntax as Terraform language files, but consists only of variable name assignments:
+
+```TOML
+image_id = "ami-abc123"
+availability_zone_names = [
+  "us-east-1a",
+  "us-west-1c",
+]
+```
+
+JSON format is also valid, however the files should be named like `.tfvars.json`, eg. `testing.tfvars.json`:
+
+```json
+{
+  "image_id": "ami-abc123",
+  "availability_zone_names": ["us-west-1a", "us-west-1c"]
+}
+```
 
 ### terraform.tfvars
 
-This is tge default file to load in terraform variable in blunk
+This is the default file to load in terraform variable in bulk.
+`terraform.tfvars.json` is also a valid filename as long as it's *json* formated.
 
 ### auto.tfvars
 
-- **TODO:** document this functionality for terraform cloud
+Besides `terraform.tfvars` file, Terraform will also automatically loads files with names ending in `.auto.tfvars`.
+
+Terraform is also able to read `.auto.tfvars.json` files.
+
 
 ### order of terraform variables
 
-- **TODO:** document which terraform variables take precedence
+All mechanisms for setting variables can be used together in any combination. If the same variable is assigned multiple values, Terraform uses the last value it finds, overriding any previous values. Note that the same variable cannot be assigned multiple values within a single source.
+
+Terraform loads variables in the following order, with later sources taking precedence over earlier ones:
+
+- Environment variables
+- The `terraform.tfvars` file, if present.
+- The `terraform.tfvars.json` file, if present.
+- Any `*.auto.tfvars` or `*.auto.tfvars.json` files, processed in lexical order of their filenames.
+- Any `-var` and `-var-file` options on the command line, in the order they are provided. (This includes variables set by a Terraform Cloud workspace.)
