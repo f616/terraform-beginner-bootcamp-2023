@@ -40,3 +40,13 @@ variable "error_html_filepath" {
     error_message = "The specified file path does not exist or is not accessible."
   }
 }
+
+variable "content_version" {
+  description = "Content Version"
+  type        = number
+
+  validation {
+    condition     = var.content_version > 0 && floor(var.content_version) == var.content_version
+    error_message = "Content version must be a positive integer starting at 1."
+  }
+}
