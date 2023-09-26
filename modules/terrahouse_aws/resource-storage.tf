@@ -37,7 +37,7 @@ resource "aws_s3_object" "index_html" {
 
 # https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
 # https://developer.hashicorp.com/terraform/language/functions/fileset
-resource "aws_s3_bucket" "upload_assets" {
+resource "aws_s3_object" "upload_assets" {
   for_each      = fileset(var.assets_path,"*.{jpg,png,gif}")
   bucket        = aws_s3_bucket.website_bucket.bucket
   key           = "assets/${each.key}"
