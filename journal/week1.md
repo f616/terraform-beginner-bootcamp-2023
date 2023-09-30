@@ -1,5 +1,37 @@
 # Terraform Beginner Bootcamp 2023 - week 1
 
+- [Root Module Structure](#root-module-structure)
+- [Terraform and Input Variables](#terraform-and-input-variables)
+  * [Terraform Cloud Variables](#terraform-cloud-variables)
+  * [Loading Terraform Input Variables](#loading-terraform-input-variables)
+  * [var flag](#var-flag)
+  * [var-file flag](#var-file-flag)
+  * [terraform.tfvars](#terraformtfvars)
+  * [auto.tfvars](#autotfvars)
+  * [order of terraform variables](#order-of-terraform-variables)
+- [Dealing with Configuration Drift](#dealing-with-configuration-drift)
+  * [Fix Missing Resources with Terraform Import](#fix-missing-resources-with-terraform-import)
+  * [Terraform Import](#terraform-import)
+  * [Fix using Terraform Refresh](#fix-using-terraform-refresh)
+- [Terraform Modules](#terraform-modules)
+  * [Terraform Module Structure](#terraform-module-structure)
+  * [Passing Input Variables](#passing-input-variables)
+  * [Modules Sources](#modules-sources)
+- [Considerations when using ChatGPT to write Terraform](#considerations-when-using-chatgpt-to-write-terraform)
+- [Working with Files in Terraform](#working-with-files-in-terraform)
+  * [Fileexist Function](#fileexist-function)
+  * [Filemd5](#filemd5)
+  * [Path Variable](#path-variable)
+  * [Terrafor Locals](#terrafor-locals)
+  * [Terraform Data Sources](#terraform-data-sources)
+- [Working with JSON](#working-with-json)
+  * [Changing the Lifecycle of Resources](#changing-the-lifecycle-of-resources)
+- [Terraform Data](#terraform-data)
+- [Provisioners](#provisioners)
+  * [Local-exec](#local-exec)
+  * [Remote-exec](#remote-exec)
+- [For Each Expressions](#for-each-expressions)
+
 ## Root Module Structure
 
 Our root module structure is as follows:
