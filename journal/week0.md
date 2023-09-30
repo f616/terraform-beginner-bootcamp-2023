@@ -116,7 +116,7 @@ Please consider checking your Linux Distribution and change accordingly to distr
 
 Example of checking OS Version:
 
-```
+```sh
 $ cat /etc/os-release
 
 PRETTY_NAME="Ubuntu 22.04.3 LTS"
@@ -231,7 +231,7 @@ If you want to Env Vars to persist across all future bash terminals that are ope
 
 We can persist env vars into gitpot by sroting them in Gitpod Secrets Storage.
 
-```
+```sh
 gp env HELLO='world'
 ```
 
@@ -343,9 +343,7 @@ When attempting to run `terrafor login` it will launch bash a wiswig view to gen
 
 The workaround is manually generate a token in Terraform Cloud
 
-```
-https://app.terraform.io/app/settings/tokens?source=terraform-login
-```
+>https://app.terraform.io/app/settings/tokens?source=terraform-login
 
 Then create open the file manually here:
 

@@ -71,7 +71,7 @@ This flags allows you to specify a .tfvars file to be loaded, eg. `terraform app
 
 The file format uses the basic syntax as Terraform language files, but consists only of variable name assignments:
 
-```TOML
+```tf
 image_id = "ami-abc123"
 availability_zone_names = [
   "us-east-1a",
@@ -174,7 +174,7 @@ $ tree complete-module/
 We can pass input variables to our module.
 The module has to declare the terraform variables into it's own variables.tf.
 
-```TOML
+```tf
 module "terrahouse_aws"{
     source = "./modules/terrahouse_aws"
     user_uuid = var.user_uuid
@@ -191,7 +191,7 @@ Using the source we can import the module from various places, eg:
 - Terraform Registry
 
 
-```TOML
+```tf
 module "terrahouse_aws"{
     source = "./modules/terrahouse_aws"
 }
@@ -316,9 +316,9 @@ resource "aws_instance" "web" {
 
 ### Remote-exec
 
-This will execute commands on a machine which you target. You will need to provide credentials such as ssg to get into the machine.
+This will execute commands on a machine which you target. You will need to provide credentials such as ssh to get into the machine.
 
-```tf
+```json
 resource "aws_instance" "web" {
   # ...
 
