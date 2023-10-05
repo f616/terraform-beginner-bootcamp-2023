@@ -21,7 +21,7 @@ variable "bucket_name" {
   }
 }
 
-variable "index_html_filepath" {
+/* variable "index_html_filepath" {
   description = "File path to the index.html file"
   type        = string
 
@@ -39,4 +39,4 @@ variable "error_html_filepath" {
     condition     = fileexists(var.error_html_filepath)
     error_message = "The specified file path does not exist or is not accessible."
   }
-}
+} */
