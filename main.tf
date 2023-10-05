@@ -1,5 +1,11 @@
 terraform {
-
+  cloud {
+    organization = "f616Org"
+    workspaces {
+      # name = "terra-house-1"      
+      name = "terraform-cloud"
+    }
+  } 
 }
 
 module "terrahouse_aws"{
