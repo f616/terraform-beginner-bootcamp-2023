@@ -1,14 +1,15 @@
 // package main: Declares the package name
-// The main package is a special in Go, it's 
+// The main package is a special in Go, it's
 // where the execution of the program starts
 package main
 
 // import "fmt": Imports the fmt package.
-// It shorts for format, which contains 
+// It shorts for format, which contains
 // functions for formated I/O.
 import (
 	// "log"
 	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
@@ -16,7 +17,7 @@ import (
 // func main(): Defines the main function, the
 // entrypoint of the application, when you run
 // the program, it starts executing from this function
-func main()  {
+func main() {
 	plugin.Serve(&plugin.ServeOpts{
 		ProviderFunc: Provider,
 	})
@@ -27,30 +28,26 @@ func main()  {
 
 // https://developer.hashicorp.com/terraform/tutorials/providers/provider-setup
 // in Golang
-func Provider() *schema.Provider{
+func Provider() *schema.Provider {
 	var p *schema.Provider
 	p = &schema.Provider{
-		ResourcesMap: map[string]*schema.Resource{
-			
-		},
-    DataSourcesMap: map[string]*schema.Resource{
-			
-		},
+		ResourcesMap:   map[string]*schema.Resource{},
+		DataSourcesMap: map[string]*schema.Resource{},
 		Schema: map[string]*schema.Schema{
 			"endpoint": {
-				Type: schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
 				Description: "The endpoint for the external service",
 			},
 			"token": {
-				Type: schema.TypeString,
-				Sensitive: true, // make the token as sensitive to hide it in the logs
-				Required: true,
+				Type:        schema.TypeString,
+				Sensitive:   true, // make the token as sensitive to hide it in the logs
+				Required:    true,
 				Description: "The bearer token for authorization",
 			},
 			"user_uuid": {
-				Type: schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
 				Description: "The UUID for configuration",
 				// ValidateFunc: validateUUID,
 			},
