@@ -107,7 +107,7 @@ func Resource() *schema.Resource {
 				Required:    true,
 				Description: "Name of home",
 			},
-			"desciption": {
+			"description": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "Description of home",
