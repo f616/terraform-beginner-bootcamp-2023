@@ -52,6 +52,6 @@ resource "terratowns_home" "home_02" {
   wafer cookies. They're incredibly delicious and simple to make and doesn't require any oven.
   DESCRIPTION
   domain_name = module.home_02_hosting.domain_name
-  town = "missingo"
+  town = "cooker-cove"
   content_version = var.home02.content_version
 }
