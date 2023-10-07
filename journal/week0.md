@@ -1,5 +1,7 @@
 # Terraform Beginner Bootcamp 2023 - week 0
 
+![image](https://github.com/f616/terraform-beginner-bootcamp-2023/assets/3826426/a1d21b3b-b25c-4dd3-98fd-f80ad65e9d4c)
+
 - [Semantic Versioning :mage:](#semantic-versioning--mage-)
 - [Using Git](#using-git)
   * [Creating Tags](#creating-tags)
