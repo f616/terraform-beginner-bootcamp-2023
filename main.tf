@@ -5,12 +5,12 @@ terraform {
       version = "1.0.0"
     }
   }
-  # cloud {
-  #   organization = "f616Org"
-  #   workspaces {
-  #     name = "terra-house-1"
-  #   }
-  # }  
+  cloud {
+    organization = "f616Org"
+    workspaces {
+      name = "terra-house-1"
+    }
+  }  
 }
 
 provider "terratowns" {
@@ -19,23 +19,39 @@ provider "terratowns" {
   token = var.terrarowns_access_token
 }
 
-module "terrahouse_aws"{
-  source = "./modules/terrahouse_aws"
+module "home_01_hosting"{
+  source = "./modules/terrahome_aws"
   user_uuid = var.teacherseat_user_uuid
-  index_html_filepath = var.index_html_filepath
-  error_html_filepath = var.error_html_filepath
-  content_version = var.content_version
-  assets_path = var.assets_path
+  public_path = var.home01.public_path
+  content_version = var.home01.content_version
 }
 
-resource "terratowns_home" "home_arkanoid" {
+resource "terratowns_home" "home_01" {
   name = "Arkanoid: One of most addictive games in the 80's!"
   description = <<DESCRIPTION
   This is about arkanoid. A brief history of the game.
   The ports and the current evolution of the game.
   DESCRIPTION
-  domain_name = module.terrahouse_aws.cloudfront_url
-  # domain_name = "c93msdj.cloudfront.net"
+  domain_name = module.home_01_hosting.domain_name
   town = "missingo"
-  content_version = 1
+  content_version = var.home01.content_version
+}
+
+module "home_02_hosting"{
+  source = "./modules/terrahome_aws"
+  user_uuid = var.teacherseat_user_uuid
+  public_path = var.home02.public_path
+  content_version = var.home02.content_version
+}
+
+resource "terratowns_home" "home_02" {
+  name = "Recipe for Chocolate Salami"
+  description = <<DESCRIPTION
+  This chocolate salami is the perfect crunchy treat to snack on alongside coffee.
+  These ultra chocolatey cookie slices are filled with toasty hazelnuts and vanilla
+  wafer cookies. They're incredibly delicious and simple to make and doesn't require any oven.
+  DESCRIPTION
+  domain_name = module.home_02_hosting.domain_name
+  town = "cooker-cove"
+  content_version = var.home02.content_version
 }

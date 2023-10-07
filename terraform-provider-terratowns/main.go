@@ -140,10 +140,10 @@ func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interfac
 	config := m.(*Config)
 
 	payload := map[string]interface{}{
-		"name": d.Get("name").(string),
-		"description": d.Get("description").(string),
-		"domain_name": d.Get("domain_name").(string),
-		"town": d.Get("town").(string),
+		"name":            d.Get("name").(string),
+		"description":     d.Get("description").(string),
+		"domain_name":     d.Get("domain_name").(string),
+		"town":            d.Get("town").(string),
 		"content_version": d.Get("content_version").(int),
 	}
 	payloadBytes, err := json.Marshal(payload)
@@ -152,8 +152,8 @@ func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interfac
 	}
 
 	// Construct the HTTP Request
-	url := config.Endpoint+"/u/"+config.UserUuid+"/homes"
-	log.Print("URL: "+ url)
+	url := config.Endpoint + "/u/" + config.UserUuid + "/homes"
+	log.Print("URL: " + url)
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(payloadBytes))
 	if err != nil {
 		return diag.FromErr(err)
@@ -186,7 +186,7 @@ func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interfac
 
 	homeUUID := responseData["uuid"].(string)
 	d.SetId(homeUUID)
-	
+
 	log.Print("resourceHouseCreate:end")
 	return diags
 }
@@ -194,14 +194,14 @@ func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interfac
 func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	log.Print("resourceHouseRead:start")
 	var diags diag.Diagnostics
-	
+
 	config := m.(*Config)
 
 	homeUUID := d.Id()
 
 	// Construct the HTTP Request
-	url := config.Endpoint+"/u/"+config.UserUuid+"/homes/"+homeUUID
-	log.Print("URL: "+ url)
+	url := config.Endpoint + "/u/" + config.UserUuid + "/homes/" + homeUUID
+	log.Print("URL: " + url)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return diag.FromErr(err)
@@ -218,11 +218,11 @@ func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{
 		return diag.FromErr(err)
 	}
 	defer resp.Body.Close()
-	
+
 	var responseData map[string]interface{}
 
 	// StatusOK = 200 HTTP Responde Code
-	if resp.StatusCode == http.StatusOK{
+	if resp.StatusCode == http.StatusOK {
 		// parse response JSON
 		if err := json.NewDecoder(resp.Body).Decode(&responseData); err != nil {
 			return diag.FromErr(err)
@@ -231,11 +231,11 @@ func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{
 		d.Set("description", responseData["description"].(string))
 		d.Set("domain_name", responseData["domain_name"].(string))
 		d.Set("content_version", responseData["content_version"].(float64))
-	}	else if resp.StatusCode == http.StatusNotFound {
+	} else if resp.StatusCode == http.StatusNotFound {
 		d.SetId("")
-	}	else if resp.StatusCode != http.StatusOK {
+	} else if resp.StatusCode != http.StatusOK {
 		return diag.FromErr(fmt.Errorf("Failed to read home resource, status_code: %d, status: %s, body %s", resp.StatusCode, resp.Status, responseData))
-	}	
+	}
 
 	log.Print("resourceHouseRead:end")
 	return diags
@@ -244,24 +244,24 @@ func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{
 func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	log.Print("resourceHouseUpdate:start")
 	var diags diag.Diagnostics
-	
+
 	config := m.(*Config)
 
 	homeUUID := d.Id()
 
 	payload := map[string]interface{}{
-		"name": d.Get("name").(string),
-		"description": d.Get("description").(string),
+		"name":            d.Get("name").(string),
+		"description":     d.Get("description").(string),
 		"content_version": d.Get("content_version").(int),
 	}
 	payloadBytes, err := json.Marshal(payload)
 	if err != nil {
 		return diag.FromErr(err)
-	}	
+	}
 
 	// Construct the HTTP Request
-	url := config.Endpoint+"/u/"+config.UserUuid+"/homes/"+homeUUID
-	log.Print("URL: "+ url)
+	url := config.Endpoint + "/u/" + config.UserUuid + "/homes/" + homeUUID
+	log.Print("URL: " + url)
 	req, err := http.NewRequest("PUT", url, bytes.NewBuffer(payloadBytes))
 	if err != nil {
 		return diag.FromErr(err)
@@ -279,15 +279,21 @@ func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interfac
 	}
 	defer resp.Body.Close()
 
+	// parse response JSON
+	var responseData map[string]interface{}
+	if err := json.NewDecoder(resp.Body).Decode(&responseData); err != nil {
+		return diag.FromErr(err)
+	}
+
 	// StatusOK = 200 HTTP Responde Code
 	if resp.StatusCode != http.StatusOK {
-		return diag.FromErr(fmt.Errorf("Failed to update home resource, status_code: %d, status: %s", resp.StatusCode, resp.Status))
-	}	
+		return diag.FromErr(fmt.Errorf("Failed to update home resource, status_code: %d, status: %s, body %s", resp.StatusCode, resp.Status, responseData))
+	}
 
 	d.Set("name", payload["name"])
 	d.Set("description", payload["description"])
 	d.Set("content_version", payload["content_version"])
-	
+
 	log.Print("resourceHouseUpdate:end")
 	return diags
 }
@@ -295,14 +301,14 @@ func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interfac
 func resourceHouseDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	log.Print("resourceHouseDelete:start")
 	var diags diag.Diagnostics
-	
+
 	config := m.(*Config)
 
 	homeUUID := d.Id()
 
 	// Construct the HTTP Request
-	url := config.Endpoint+"/u/"+config.UserUuid+"/homes/"+homeUUID
-	log.Print("URL: "+ url)
+	url := config.Endpoint + "/u/" + config.UserUuid + "/homes/" + homeUUID
+	log.Print("URL: " + url)
 	req, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
 		return diag.FromErr(err)
@@ -323,7 +329,7 @@ func resourceHouseDelete(ctx context.Context, d *schema.ResourceData, m interfac
 	// StatusOK = 200 HTTP Responde Code
 	if resp.StatusCode != http.StatusOK {
 		return diag.FromErr(fmt.Errorf("Failed to delete home resource, status_code: %d, status: %s", resp.StatusCode, resp.Status))
-	}	
+	}
 
 	d.SetId("")
 
