@@ -68,7 +68,7 @@ And then push the tag to the git repository:
 
 If a tag is created and pushed by mistake, it can be deleted.
 
-Delete the tag locally using the command `git tad -d 0.2.0`
+Delete the tag locally using the command `git tag -d 0.2.0`
 
 Delete the tag from the remote repository using the command `git push --delete origin 0.2.0`
 
