@@ -7,18 +7,12 @@ package main
 // It shorts for format, which contains
 // functions for formated I/O.
 import (
-<<<<<<< HEAD
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-=======
-	"context"
-	"fmt"
-	"log"
->>>>>>> main
 
 	"github.com/google/uuid"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
