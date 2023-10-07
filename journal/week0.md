@@ -1,5 +1,7 @@
 # Terraform Beginner Bootcamp 2023 - week 0
 
+![image](https://github.com/f616/terraform-beginner-bootcamp-2023/assets/3826426/a1d21b3b-b25c-4dd3-98fd-f80ad65e9d4c)
+
 - [Semantic Versioning :mage:](#semantic-versioning--mage-)
 - [Using Git](#using-git)
   * [Creating Tags](#creating-tags)
@@ -66,7 +68,7 @@ And then push the tag to the git repository:
 
 If a tag is created and pushed by mistake, it can be deleted.
 
-Delete the tag locally using the command `git tad -d 0.2.0`
+Delete the tag locally using the command `git tag -d 0.2.0`
 
 Delete the tag from the remote repository using the command `git push --delete origin 0.2.0`
 

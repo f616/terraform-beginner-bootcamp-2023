@@ -1,5 +1,7 @@
 # Terraform Beginner Bootcamp 2023 - week 1
 
+![image](https://github.com/f616/terraform-beginner-bootcamp-2023/assets/3826426/65b8a182-1f61-4862-bb9a-1610ff79ec82)
+
 - [Root Module Structure](#root-module-structure)
 - [Terraform and Input Variables](#terraform-and-input-variables)
   * [Terraform Cloud Variables](#terraform-cloud-variables)
